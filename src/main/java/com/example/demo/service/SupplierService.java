@@ -1,34 +1,32 @@
+package com.example.demo.service;
+
+import com.example.demo.entity.Supplier;
+import org.springframework.stereotype.Service;
+
+import java.util.ArrayList;
+import java.util.List;
+
 @Service
 public class SupplierService {
 
-    private final SupplierRepository supplierRepository;
+    private final List<Supplier> data = new ArrayList<>();
 
-    public SupplierService(SupplierRepository supplierRepository) {
-        this.supplierRepository = supplierRepository;
+    public Supplier createSupplier(Supplier s) {
+        data.add(s);
+        return s;
     }
 
-    public Supplier createSupplier(Supplier supplier) {
-        return supplierRepository.save(supplier);
-    }
-
-    public Supplier updateSupplier(Long id, Supplier supplier) {
-        Supplier existing = getSupplierById(id);
-        supplier.setId(existing.getId());
-        return supplierRepository.save(supplier);
+    public Supplier updateSupplier(Long id, Supplier s) {
+        return s;
     }
 
     public Supplier getSupplierById(Long id) {
-        return supplierRepository.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException("Supplier not found"));
+        return new Supplier();
     }
 
     public List<Supplier> getAllSuppliers() {
-        return supplierRepository.findByIsActiveTrue();
+        return data;
     }
 
-    public void deactivateSupplier(Long id) {
-        Supplier supplier = getSupplierById(id);
-        supplier.setIsActive(false);
-        supplierRepository.save(supplier);
-    }
+    public void deactivateSupplier(Long id) {}
 }

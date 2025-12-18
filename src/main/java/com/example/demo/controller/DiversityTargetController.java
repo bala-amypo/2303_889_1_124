@@ -40,4 +40,7 @@ public class DiversityTargetController {
     }
 
     @PutMapping("/{id}/deactivate")
-    public voi
+    public void deactivate(@PathVariable Long id) {
+        service.deactivateTarget(id);
+    }
+}
