@@ -41,4 +41,4 @@ public class SpendCategoryController {
         service.deactivateCategory(id);
     }
 }
-        
+    
