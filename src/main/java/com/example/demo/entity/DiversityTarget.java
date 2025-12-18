@@ -1,14 +1,7 @@
-@Entity
+package com.example.demo.entity;
+
 public class DiversityTarget {
-
-    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-
-    private Integer targetYear;
-
-    @ManyToOne
-    private DiversityClassification classification;
-
-    private Double targetPercentage;
-    private Boolean active = true;
+    public Long id;
+    public String category;
+    public Double percentage;
 }

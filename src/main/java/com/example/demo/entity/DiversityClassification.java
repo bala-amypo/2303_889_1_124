@@ -1,11 +1,6 @@
-@Entity
-@Table(uniqueConstraints = @UniqueConstraint(columnNames = "code"))
+package com.example.demo.entity;
+
 public class DiversityClassification {
-
-    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-
-    private String code;
-    private String description;
-    private Boolean active = true;
+    public Long id;
+    public String name;
 }

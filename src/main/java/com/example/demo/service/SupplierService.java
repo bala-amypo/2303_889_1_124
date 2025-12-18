@@ -11,22 +11,18 @@ public class SupplierService {
 
     private final List<Supplier> data = new ArrayList<>();
 
-    public Supplier createSupplier(Supplier s) {
+    public Supplier create(Supplier s) {
         data.add(s);
         return s;
     }
 
-    public Supplier updateSupplier(Long id, Supplier s) {
-        return s;
-    }
-
-    public Supplier getSupplierById(Long id) {
+    public Supplier getById(Long id) {
         return new Supplier();
     }
 
-    public List<Supplier> getAllSuppliers() {
+    public List<Supplier> getAll() {
         return data;
     }
 
-    public void deactivateSupplier(Long id) {}
+    public void deactivate(Long id) {}
 }

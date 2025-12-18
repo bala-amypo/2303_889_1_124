@@ -1,20 +1,7 @@
-@Entity
-@Table(uniqueConstraints = @UniqueConstraint(columnNames = "poNumber"))
+package com.example.demo.entity;
+
 public class PurchaseOrder {
-
-    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-
-    private String poNumber;
-
-    @ManyToOne
-    private Supplier supplier;
-
-    @ManyToOne
-    private SpendCategory category;
-
-    private BigDecimal amount;
-    private LocalDate dateIssued;
-    private String approvedBy;
-    private String notes;
+    public Long id;
+    public String orderNumber;
+    public Double amount;
 }

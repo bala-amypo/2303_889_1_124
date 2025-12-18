@@ -1,11 +1,7 @@
-@Entity
-@Table(uniqueConstraints = @UniqueConstraint(columnNames = "name"))
+package com.example.demo.entity;
+
 public class SpendCategory {
-
-    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-
-    private String name;
-    private String description;
-    private Boolean active = true;
+    public Long id;
+    public String name;
+    public boolean active = true;
 }
