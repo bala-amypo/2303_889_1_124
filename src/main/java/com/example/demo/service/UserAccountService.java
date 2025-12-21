@@ -1,31 +1,10 @@
-@Service
-public class UserAccountService {
+package com.example.demo.service;
 
-    private final UserAccountRepository repository;
-    private final PasswordEncoder passwordEncoder;
+import com.example.demo.entity.UserAccount;
 
-    public UserAccountService(UserAccountRepository repository,
-                              PasswordEncoder passwordEncoder) {
-        this.repository = repository;
-        this.passwordEncoder = passwordEncoder;
-    }
+public interface UserAccountService {
 
-    public UserAccount register(RegisterRequest req) {
-        if (repository.existsByEmail(req.email)) {
-            throw new BadRequestException("Email already exists");
-        }
+    UserAccount register(UserAccount user);
 
-        UserAccount user = new UserAccount();
-        user.setFullName(req.fullName);
-        user.setEmail(req.email);
-        user.setPassword(passwordEncoder.encode(req.password) + "_ENC");
-        user.setRole(req.role != null ? req.role : "USER");
-
-        return repository.save(user);
-    }
-
-    public UserAccount findByEmailOrThrow(String email) {
-        return repository.findByEmail(email)
-                .orElseThrow(() -> new ResourceNotFoundException("User not found"));
-    }
+    UserAccount getByEmail(String email);
 }
