@@ -2,14 +2,12 @@ package com.example.demo.controller;
 
 import com.example.demo.entity.DiversityTarget;
 import com.example.demo.service.DiversityTargetService;
-import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
 @RequestMapping("/api/targets")
-@Tag(name = "Diversity Targets")
 public class DiversityTargetController {
 
     private final DiversityTargetService service;
@@ -19,28 +17,13 @@ public class DiversityTargetController {
     }
 
     @PostMapping
-    public DiversityTarget create(@RequestBody DiversityTarget target) {
+    public DiversityTarget createTarget(
+            @RequestBody DiversityTarget target) {
         return service.createTarget(target);
     }
 
-    @PutMapping("/{id}")
-    public DiversityTarget update(@PathVariable Long id,
-                                  @RequestBody DiversityTarget target) {
-        return service.updateTarget(id, target);
-    }
-
-    @GetMapping
-    public List<DiversityTarget> getAll() {
-        return service.getAllTargets();
-    }
-
-    @GetMapping("/year/{year}")
-    public List<DiversityTarget> getByYear(@PathVariable Integer year) {
-        return service.getTargetsByYear(year);
-    }
-
-    @PutMapping("/{id}/deactivate")
-    public void deactivate(@PathVariable Long id) {
-        service.deactivateTarget(id);
+    @GetMapping("/active")
+    public List<DiversityTarget> getActiveTargets() {
+        return service.getActiveTargets();
     }
 }

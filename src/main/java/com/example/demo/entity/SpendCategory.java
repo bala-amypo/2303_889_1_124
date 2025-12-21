@@ -1,7 +1,21 @@
 package com.example.demo.entity;
 
+import jakarta.persistence.*;
+
+@Entity
 public class SpendCategory {
-    public Long id;
-    public String name;
-    public boolean active = true;
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    private Boolean active;
+
+    public Long getId() {
+        return id;
+    }
+
+    public Boolean getActive() {
+        return active;
+    }
 }

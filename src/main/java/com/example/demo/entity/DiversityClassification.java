@@ -1,6 +1,17 @@
 package com.example.demo.entity;
 
+import jakarta.persistence.*;
+
+@Entity
+@Table(name = "diversity_classifications")
 public class DiversityClassification {
-    public Long id;
-    public String name;
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    private String code;
+    private boolean active = true;
+
+    private DiversityClassification() {}
 }
