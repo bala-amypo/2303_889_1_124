@@ -1,18 +1,12 @@
 package com.example.demo.service;
 
 import com.example.demo.entity.PurchaseOrder;
-import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-@Service
-public class PurchaseOrderService {
+public interface PurchaseOrderService {
 
-    public PurchaseOrder create(PurchaseOrder p) {
-        return p;
-    }
+    PurchaseOrder create(PurchaseOrder order);
 
-    public List<PurchaseOrder> getAll() {
-        return List.of();
-    }
+    List<PurchaseOrder> getOrdersByCategory(Long categoryId);
 }
