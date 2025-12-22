@@ -1,8 +1,10 @@
-package com.example.demo.service;
+@Bean
+public UserAccountService userDetailsService(PasswordEncoder passwordEncoder) {
+    UserDetails user = User.builder()
+            .username("admin")
+            .password(passwordEncoder.encode("admin123"))
+            .roles("ADMIN")
+            .build();
 
-import com.example.demo.entity.UserAccount;
-
-public interface UserAccountService {
-    UserAccount register(UserAccount userAccount);
-    UserAccount findByEmailOrThrow(String email);
+    return new InMemoryUserDetailsManager(user);
 }
