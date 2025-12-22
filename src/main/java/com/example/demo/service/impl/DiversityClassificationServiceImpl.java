@@ -1,33 +1,42 @@
 package com.example.demo.service.impl;
 
 import com.example.demo.entity.DiversityClassification;
+import com.example.demo.exception.ResourceNotFoundException;
 import com.example.demo.repository.DiversityClassificationRepository;
 import com.example.demo.service.DiversityClassificationService;
-import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
-
 import java.util.List;
 
 @Service
-@Transactional
-public class DiversityClassificationServiceImpl  
-        implements DiversityClassificationService {
+public class DiversityClassificationServiceImpl implements DiversityClassificationService {
 
     private final DiversityClassificationRepository repository;
 
-    public DiversityClassificationServiceImpl(
-            DiversityClassificationRepository repository) {
+    public DiversityClassificationServiceImpl(DiversityClassificationRepository repository) {
         this.repository = repository;
     }
 
     @Override
-    public DiversityClassification createClassification(
-            DiversityClassification classification) {
+    public DiversityClassification createClassification(DiversityClassification classification) {
+        classification.preSave();
         return repository.save(classification);
     }
 
     @Override
-    public List<DiversityClassification> getActiveClassifications() {
-        return repository.findByActiveTrue();
+    public DiversityClassification getClassificationById(Long id) {
+        return repository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Classification not found"));
+    }
+
+    @Override
+    public List<DiversityClassification> getAllClassifications() {
+        return repository.findAll();
+    }
+
+    @Override
+    public void deactivateClassification(Long id) {
+        DiversityClassification dc = getClassificationById(id);
+        dc.setActive(false);
+        repository.save(dc);
     }
 }
