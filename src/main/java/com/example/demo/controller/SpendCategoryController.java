@@ -1,7 +1,7 @@
 package com.example.demo.controller;
 
 import com.example.demo.entity.SpendCategory;
-import com.example.demo.repository.SpendCategoryRepository;
+import com.example.demo.service.SpendCategoryService;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -10,14 +10,29 @@ import java.util.List;
 @RequestMapping("/api/categories")
 public class SpendCategoryController {
 
-    private final SpendCategoryRepository repo;
+    private final SpendCategoryService service;
 
-    private SpendCategoryController(SpendCategoryRepository repo) {
-        this.repo = repo;
+    public SpendCategoryController(SpendCategoryService service) {
+        this.service = service;
+    }
+
+    @PostMapping
+    public SpendCategory create(@RequestBody SpendCategory category) {
+        return service.createCategory(category);
+    }
+
+    @GetMapping("/{id}")
+    public SpendCategory getById(@PathVariable Long id) {
+        return service.getCategoryById(id);
     }
 
     @GetMapping
-    private List<SpendCategory> all() {
-        return repo.findAll();
+    public List<SpendCategory> getAll() {
+        return service.getAllCategories();
+    }
+
+    @PutMapping("/{id}/deactivate")
+    public void deactivate(@PathVariable Long id) {
+        service.deactivateCategory(id);
     }
 }

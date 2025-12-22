@@ -12,19 +12,27 @@ public class DiversityClassificationController {
 
     private final DiversityClassificationService service;
 
-    public DiversityClassificationController(
-            DiversityClassificationService service) {
+    public DiversityClassificationController(DiversityClassificationService service) {
         this.service = service;
     }
 
     @PostMapping
-    public DiversityClassification createClassification(
-            @RequestBody DiversityClassification classification) {
-        return service.createClassification(classification);
+    public DiversityClassification create(@RequestBody DiversityClassification dc) {
+        return service.createClassification(dc);
     }
 
-    @GetMapping("/active")
-    public List<DiversityClassification> getActiveClassifications() {
-        return service.getActiveClassifications();
+    @GetMapping("/{id}")
+    public DiversityClassification getById(@PathVariable Long id) {
+        return service.getClassificationById(id);
+    }
+
+    @GetMapping
+    public List<DiversityClassification> getAll() {
+        return service.getAllClassifications();
+    }
+
+    @PutMapping("/{id}/deactivate")
+    public void deactivate(@PathVariable Long id) {
+        service.deactivateClassification(id);
     }
 }

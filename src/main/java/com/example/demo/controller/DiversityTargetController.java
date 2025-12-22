@@ -17,13 +17,22 @@ public class DiversityTargetController {
     }
 
     @PostMapping
-    public DiversityTarget createTarget(
-            @RequestBody DiversityTarget target) {
+    public DiversityTarget create(@RequestBody DiversityTarget target) {
         return service.createTarget(target);
     }
 
-    @GetMapping("/active")
-    public List<DiversityTarget> getActiveTargets() {
-        return service.getActiveTargets();
+    @GetMapping("/year/{year}")
+    public List<DiversityTarget> getByYear(@PathVariable int year) {
+        return service.getTargetsByYear(year);
+    }
+
+    @GetMapping
+    public List<DiversityTarget> getAll() {
+        return service.getAllTargets();
+    }
+
+    @PutMapping("/{id}/deactivate")
+    public void deactivate(@PathVariable Long id) {
+        service.deactivateTarget(id);
     }
 }
