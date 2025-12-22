@@ -20,7 +20,7 @@ public class OpenApiConfig {
                         .description("API documentation for AmyPO test cases")
                 )
                 .servers(List.of(
-                        new Server().url("https://9419.pro604cr.amypo.ai/")
+                        new Server().url("https://9568.pro604cr.amypo.ai//")
                 ));
     }
 }
