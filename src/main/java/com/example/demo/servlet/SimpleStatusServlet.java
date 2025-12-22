@@ -3,19 +3,16 @@ package com.example.demo.servlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import jakarta.servlet.ServletException;
-
 import java.io.IOException;
+import java.io.PrintWriter;
 
 public class SimpleStatusServlet extends HttpServlet {
 
     @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-
-        response.setContentType("text/plain");
-        response.setCharacterEncoding("UTF-8");
-
-        response.getWriter().write("Supplier Diversity Tracker is running");
+    public void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+        resp.setContentType("text/plain");
+        PrintWriter writer = resp.getWriter();
+        writer.write("Supplier Diversity Tracker is running");
+        writer.flush();
     }
 }
