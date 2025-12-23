@@ -14,20 +14,17 @@ import org.springframework.security.web.SecurityFilterChain;
 @Configuration
 public class SecurityConfig {
 
-    // ✅ REQUIRED BY AuthController
     @Bean
     public AuthenticationManager authenticationManager(
             AuthenticationConfiguration config) throws Exception {
         return config.getAuthenticationManager();
     }
 
-    // ✅ REQUIRED BY authenticationProvider
     @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
 
-    // ✅ AUTH PROVIDER
     @Bean
     public AuthenticationProvider authenticationProvider(
             PasswordEncoder passwordEncoder) {
@@ -37,7 +34,6 @@ public class SecurityConfig {
         return provider;
     }
 
-    // ✅ SECURITY FILTER CHAIN (Swagger + APIs work)
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
