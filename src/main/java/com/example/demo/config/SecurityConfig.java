@@ -45,3 +45,7 @@ public class SecurityConfig {
         return http.build();
     }
 }
+
+
+
+mvn spring-boot:run -Dspring-boot.run.arguments=--debug
