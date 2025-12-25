@@ -5,6 +5,7 @@ import com.example.demo.exception.ResourceNotFoundException;
 import com.example.demo.repository.SupplierRepository;
 import com.example.demo.service.SupplierService;
 import org.springframework.stereotype.Service;
+
 import java.util.List;
 
 @Service
@@ -18,14 +19,17 @@ public class SupplierServiceImpl implements SupplierService {
 
     @Override
     public Supplier createSupplier(Supplier supplier) {
-        supplier.prePersist();
         return supplierRepository.save(supplier);
     }
 
     @Override
     public Supplier getSupplierById(Long id) {
         return supplierRepository.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException("Supplier not found"));
+                .orElseThrow(() ->
+                        new ResourceNotFoundException(
+                                "Supplier not found with id: " + id
+                        )
+                );
     }
 
     @Override
@@ -35,8 +39,8 @@ public class SupplierServiceImpl implements SupplierService {
 
     @Override
     public void deactivateSupplier(Long id) {
-        Supplier s = getSupplierById(id);
-        s.setIsActive(false);
-        supplierRepository.save(s);
+        Supplier supplier = getSupplierById(id);
+        supplier.setIsActive(false);
+        supplierRepository.save(supplier);
     }
 }
