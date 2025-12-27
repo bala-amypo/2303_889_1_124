@@ -20,7 +20,7 @@ public class SwaggerConfig {
                         .description("API documentation for AmyPO test cases")
                 )
                 .servers(List.of(
-                        new Server().url("hhttps://9249.pro604cr.amypo.ai/")
+                        new Server().url("https://9249.pro604cr.amypo.ai/")
                 ));
     }
 }
